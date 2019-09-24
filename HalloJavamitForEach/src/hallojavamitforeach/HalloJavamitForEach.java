@@ -5,6 +5,7 @@
  */
 package hallojavamitforeach;
 
+import java.util.*;
 /**
  *
  * @author seigl
@@ -15,7 +16,15 @@ public class HalloJavamitForEach {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        List<String> list = new LinkedList();
+
+        list.add("hallo");
+        list.add("grias di");
+        list.add("geht denn");
+
+        for (String string : list) {
+            System.out.println(string);
+        }
+        
     }
-    
 }
