@@ -17,12 +17,13 @@ public class HalloJavamitForEach {
         list.add("grias di");
         list.add("geht denn");
 
+        System.out.println("For-each schleife:");
         for(String str : list) {
             System.out.println(str);
         }
 
         System.out.println("-----------------------");
-
+        System.out.println("forEach:");
         list.forEach(System.out::println);
     }
 
