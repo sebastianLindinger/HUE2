@@ -1,4 +1,3 @@
-import java.util.Scanner;
 import java.util.function.BinaryOperator;
 import java.util.function.UnaryOperator;
 
