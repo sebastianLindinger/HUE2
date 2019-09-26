@@ -38,6 +38,9 @@ public class Main {
                 case 3:
                     calculator = new ComplexCalculator();
                     break;
+
+                case 4:
+                    continue;
             }
 
             if(!(eing < 1 || eing > 4)) {
