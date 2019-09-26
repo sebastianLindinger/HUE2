@@ -101,7 +101,7 @@ public class Main {
                             System.out.println("Solution");
                             System.out.println("a = " + result.getA());
                             if (calculator instanceof ComplexCalculator) {
-                                System.out.println("b = " + result.getB() + "i");
+                                System.out.println("b = " + result.getB() + " i");
                             } else {
                                 System.out.println("b = " + result.getB());
                             }
