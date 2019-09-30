@@ -1,5 +1,13 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        NumberTester numberTester = new NumberTester("5\n1 6\n2 11\n3 22\n2 7\n2 61\n2 10\n2 100\n2 33");
+        Scanner scanner = new Scanner(System.in, "Windows-1252");
+        scanner.useDelimiter("\n");
+
+        System.out.println("Enter Filename: [file/openMe.txt]");
+        String filename = scanner.next();
+
+        NumberTester numberTester = new NumberTester(filename);
     }
 }

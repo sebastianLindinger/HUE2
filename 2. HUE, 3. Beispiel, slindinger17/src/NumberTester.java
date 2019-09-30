@@ -1,3 +1,10 @@
+import sun.misc.IOUtils;
+
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 public class NumberTester {
     private String fileName;
 
@@ -32,46 +39,73 @@ public class NumberTester {
     }
 
     public void testFile() {
-        String[] row = fileName.split("\n");
+        File file = new File(fileName);
+        if(file.exists()){
+            try(FileReader fileStream = new FileReader(file);
+                BufferedReader bufferedReader = new BufferedReader (fileStream) ) {
 
-        for (int i = 1; i < row.length; i++) {
-            row[i] = row[i].trim();
-            switch (Integer.parseInt(row[i].substring(0, 1))) {
-                case 1:
-                    setOddEvenTester(Integer.parseInt(row[i].substring(2)), (Number) -> {
-                        if ((Number % 2) == 0) {
-                            return true;
-                        } else {
-                            return false;
+                int i = -1;
+                int length = 0;
+                String line;
+                do {
+                    i++;
+                    line  = bufferedReader.readLine();
+                    if(0 == length){
+                        try {
+                            length = Integer.parseInt(line);
+                        } catch (NumberFormatException e){
+                            System.out.println("not a valid input on line 1 in text file");
                         }
-                    });
+                    } else {
+                        try {
+                            switch (Integer.parseInt(line.substring(0, 1))) {
+                                case 1:
+                                    setOddEvenTester(Integer.parseInt(line.substring(2)), (Number) -> {
+                                        if ((Number % 2) == 0) {
+                                            return true;
+                                        } else {
+                                            return false;
+                                        }
+                                    });
+                                    break;
 
+                                case 2:
+                                    setPrimeTester(Integer.parseInt(line.substring(2)), (n) -> {
+                                        for (int j = 2; j < n / 2; j++) {
+                                            if ((n % j) == 0) {
+                                                return false;
+                                            }
+                                        }
+                                        return true;
+                                    });
+                                    break;
 
+                                case 3:
+                                    setPalindromeTester(Integer.parseInt(line.substring(2)), (n) -> {
+                                        String n1 = "" + n;
+                                        String number = "";
+                                        for (int i1 = n1.length() - 1; i1 >= 0; i1--) {
+                                            number += n1.charAt(i1);
+                                        }
+                                        return n1.equals(number);
+                                    });
+                                    break;
 
-                    break;
-
-                case 2:
-                    setPrimeTester(Integer.parseInt(row[i].substring(2)),(n) -> {
-                        for (int j = 2; j < n / 2; j++) {
-                            if ((n % j) == 0) {
-                                return false;
+                                default:
+                                    throw new Exception();
                             }
-                        }
-                        return true;
-                    });
-                    break;
 
-                case 3:
-                    setPalindromeTester(Integer.parseInt(row[i].substring(2)), (n) -> {
-                        String n1 = ""+n;
-                        String number = "";
-                        for(int i1 = n1.length()-1; i1 >= 0; i1--){
-                            number += n1.charAt(i1);
+                        } catch (Exception e){
+                            System.out.println("not a valid input on line " + (i+1) +" in text file");
                         }
-                        return n1.equals(number);
-                    });
+                    }
+                }while(i < length);
+
+            } catch (FileNotFoundException e) {
+            } catch (IOException ex ) {
             }
-
+        } else {
+            System.out.println("File not found");
         }
     }
 }
